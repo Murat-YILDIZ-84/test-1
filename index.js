@@ -1,5 +1,5 @@
-const cors = require('cors');
 const express = require("express");
+const cors = require('cors');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -14,9 +14,15 @@ app.use((req, res, next) => {
 });
 
 app.get("/sunucu", (req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/json'});
-    //res.write("Hazır-3");
-    res.write(req.url.split("?")[1]);
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write("Hazır-1");
+    //res.write(req.url.split("?")[1]);
+    res.end();
+})
+
+app.get("/test", (req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write("Tamam");
     res.end();
 })
 
