@@ -22,18 +22,12 @@ app.get("/test", (req, res) => {
 app.get("/sunucu", (req, res) => {
     res.writeHead(200, {'Content-Type': 'text/javascript'});
     //res.write(req.url.split("?")[1]);
-    res.write(`
-        var url = "https:\/\/livestream.ibb.gov.tr\/cam_turistik\/b_kapalicarsi.stream\/playlist.m3u8";
-        var bradmaxPlayerConfig = {
-            "showErrorDetails":false,
-            "contextMenuDisabled": true,
-            "dataProvider":{"source":[{"url":url}]},
-            "autoplay":true,
-            "mute":true
-        };
-        var element = document.getElementById("bradmaxPlayer");
-        player = window.bradmax.player.create(element, bradmaxPlayerConfig);
-    `);
+    res.write("<script>");
+    res.write("var url = 'https:\/\/livestream.ibb.gov.tr\/cam_turistik\/b_kapalicarsi.stream\/playlist.m3u8';");
+    res.write("var bradmaxPlayerConfig = { 'showErrorDetails':false, 'contextMenuDisabled': true, 'dataProvider':{'source':[{'url':url}]}, 'autoplay':true, 'mute':true };");
+    res.write("var element = document.getElementById('bradmaxPlayer');");
+    res.write("player = window.bradmax.player.create(element, bradmaxPlayerConfig);");
+    res.write("</script>");
     res.end();
 })
 
