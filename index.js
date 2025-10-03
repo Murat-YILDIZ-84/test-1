@@ -21,9 +21,6 @@ app.get("/test", (req, res) => {
 
 app.get("/sunucu", (req, res) => {
     res.writeHead(200, {'Content-Type': 'text/javascript'});
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     //res.write(req.url.split("?")[1]);
     res.write("https://livestream.ibb.gov.tr/cam_turistik/b_kapalicarsi.stream/playlist.m3u8");
     res.end();
