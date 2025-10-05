@@ -1,6 +1,7 @@
 const cors = require('cors');
 const express = require("express");
 const app = express();
+const http = require('http');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,10 +21,19 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/sunucu", (req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/javascript'});
-    //res.write(req.url.split("?")[1]);
-    res.write("https://livestream.ibb.gov.tr/cam_turistik/b_kapalicarsi.stream/playlist.m3u8");
-    res.end();
+    http.get('https://livestream.ibb.gov.tr/cam_turistik/b_kapalicarsi.stream/playlist.m3u8', resp => {
+        let data = ''       
+        resp.on('data', chunk => {
+            data += chunk
+            res.writeHead(200, {'Content-Type': 'text/javascript'});
+            res.write(data);
+            res.end();
+        })       
+        resp.on('end', () => {
+            let peopleData = JSON.parse(data)
+            console.log(peopleData)
+        })
+    })  
 })
 
 
