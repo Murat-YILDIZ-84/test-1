@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require("express");
 const app = express();
-const http = require('http');
+const https = require('https');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,7 +21,7 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/sunucu", (req, res) => {
-    http.get('https://livestream.ibb.gov.tr/cam_turistik/b_kapalicarsi.stream/playlist.m3u8', resp => {
+    https.get('https://livestream.ibb.gov.tr/cam_turistik/b_kapalicarsi.stream/playlist.m3u8', resp => {
         let data = ''       
         resp.on('data', chunk => {
             data += chunk
@@ -35,7 +35,5 @@ app.get("/sunucu", (req, res) => {
         })
     })  
 })
-
-
 
 app.listen(5000, () => console.log('Server is running on port 5000'));
